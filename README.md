@@ -40,6 +40,14 @@ The instructions to create a token for the Reprise Replay Data API, based on the
 
 You will need to provide the token, client_id, and start_timestamp to use the tap.
 
+```
+{
+    "client_id": "",
+    "start_timestamp": "2025-06-20 00:00:00",
+    "token": ""
+}
+```
+
 ## Usage
 
 You can easily run `tap-reprise` by itself or in a pipeline using [Meltano](https://meltano.com/).
