@@ -16,7 +16,6 @@ else:
 
 SCHEMAS_DIR = importlib_resources.files(__package__) / "schemas"
 
-
 class ReplaySessionActivityDailyStream(RepriseStream):
     """Replay Session Activity stream from the Replay Data API."""
 
@@ -25,6 +24,9 @@ class ReplaySessionActivityDailyStream(RepriseStream):
     primary_keys = ["activity_id"]
     replication_key = "create_at"
     schema_filepath = SCHEMAS_DIR / "replay_session_activity.json"
+
+    def is_timestamp_replication_key(self) -> bool:
+        return True
 
     def get_url_params(
         self,

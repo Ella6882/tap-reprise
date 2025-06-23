@@ -1,7 +1,7 @@
 {
   "type": "object",
   "properties": {
-    "Client_id": { "type": ["string", "null"] },
+    "client_id": { "type": ["string", "null"] },
     "activity_id": { "type": ["string", "null"] },
     "activity_type": { "type": ["string", "null"] },
     "snapshot_id": { "type": ["string", "null"] },
@@ -15,13 +15,13 @@
     "create_at": { "type": ["null", "string"], "format": "date-time" },
     "session_id": { "type": ["string", "null"] },
     "visitor_company": { "type": ["string", "null"] },
-    "session_created_at": { "type": ["string", "null"] },
+    "session_created_at": { "type": ["null", "string"], "format": "date-time" },
     "link_id": { "type": ["string", "null"] },
     "link_title": { "type": ["string", "null"] },
     "link_description": { "type": ["string", "null"] },
     "link_url": { "type": ["string", "null"] },
     "link_is_active": { "type": ["string", "null"] },
-    "link_created_at": { "type": ["string", "null"] },
+    "link_created_at": { "type": ["null", "string"], "format": "date-time" },
     "link_deleted_at": { "type": ["string", "null"] },
     "link_is_default": { "type": ["string", "null"] },
     "link_show_welcome": { "type": ["string", "null"] },
@@ -31,7 +31,7 @@
     "link_viewer_password_req": { "type": ["string", "null"] },
     "published_replay_id": { "type": ["string", "null"] },
     "published_replay_title": { "type": ["string", "null"] },
-    "published_replay_created_at": { "type": ["string", "null"] },
+    "published_replay_created_at": { "type": ["null", "string"], "format": "date-time" },
     "draft_replay_id": { "type": ["string", "null"] },
     "draft_replay_title": { "type": ["string", "null"] }
   }
