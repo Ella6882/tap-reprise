@@ -34,6 +34,11 @@ class TapReprise(Tap):
             description="The earliest record date to sync",
         ),
         th.Property(
+            "end_timestamp",
+            th.DateTimeType,
+            description="The latest record date to sync",
+        ),
+        th.Property(
             "api_url",
             th.StringType,
             default="https://api.us-east.tinybird.co/v0/pipes/replay_session_activity.json",

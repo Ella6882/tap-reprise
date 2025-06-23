@@ -33,19 +33,23 @@ class ReplaySessionActivityDailyStream(RepriseStream):
     ) -> dict[str, Any]:
 
         params = {}
-        date_end = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
+
+        end_date = self.config.get("end_timestamp")
+        if end_date is None:
+            # If no end date is provided, use the current time in UTC
+            end_date = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
 
         start_date = self.get_starting_timestamp(context)
 
         if start_date is None:
             start_date_str = self.config.get("start_timestamp")
         else:
-            start_date_str = start_date.strftime('%Y-%m-%d %H:%M:%S')
-
+            start_date_str = start_date.strftime("%Y-%m-%d %H:%M:%S")
+            
         params.update({
             "client_id": self.config["client_id"],
             "start_timestamp": start_date_str,
-            "end_timestamp": date_end,
+            "end_timestamp": end_date,
             "visitor_company": 1,
             "token": self.config["token"]
         })
