@@ -12,7 +12,7 @@
     "guide_trigger": { "type": ["string", "null"] },
     "button_text": { "type": ["string", "null"] },
     "button_action": { "type": ["string", "null"] },
-    "create_at": { "type": ["string", "null"] },
+    "create_at": { "type": ["null", "string"], "format": "date-time" },
     "session_id": { "type": ["string", "null"] },
     "visitor_company": { "type": ["string", "null"] },
     "session_created_at": { "type": ["string", "null"] },
