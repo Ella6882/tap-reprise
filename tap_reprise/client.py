@@ -2,12 +2,12 @@
 
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
-from typing import Iterable
+from typing import Iterable, Tuple, Dict
 from datetime import datetime, timedelta
 
 import requests
 
-def date_range(start_datetime: datetime, end_datetime: datetime, step: int = 1) -> Iterable[tuple[str, str]]:
+def date_range(start_datetime: datetime, end_datetime: datetime, step: int = 1) -> Iterable[Tuple[str, str]]:
     """Generate date ranges of 1 day within the given timeframe.
     """
     start = datetime.strptime(start_datetime, "%Y-%m-%d %H:%M:%S")
@@ -42,7 +42,7 @@ class RepriseStream(RESTStream):
             extension: str = ""
         return f"{url}{extension}.json?"
 
-    def get_records(self, context: dict) -> Iterable[dict]:
+    def get_records(self, context: Dict) -> Iterable[dict]:
         """Override to fetch records for each 31-day period."""
         
         for start, end in date_range(self.start_date, self.end_date):
