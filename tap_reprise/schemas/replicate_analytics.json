@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "shard_name": { "type": ["string", "null"] },
+    "client_id": { "type": ["string", "null"] },
+    "demo_title": { "type": ["string", "null"] },
+    "demo_published_date": { "type": ["null", "string"], "format": "date-time" },
+    "session_date": { "type": ["null", "string"], "format": "date-time" }
+  }
+}
+

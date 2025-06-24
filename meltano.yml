@@ -19,10 +19,16 @@ plugins:
     - stream-maps
 
     settings:
-    - name: token
+    - name: replay_token
       kind: password
       label: token
-      description: The token to use for authentication
+      description: The token to use for authentication for the Replay API.
+      sensitive: true
+
+    - name: replicate_token
+      kind: password
+      label: token
+      description: The token to use for authentication for the Reprise API.
       sensitive: true
 
     - name: client_id
@@ -45,10 +51,11 @@ plugins:
     - [token, client_id]
 
     config:
-      start_timestamp: '2024-11-01 00:00:00'
-      end_timestamp: '2024-11-30 23:59:59'
+      start_timestamp: '2024-11-21 00:00:00'
+      end_timestamp: '2024-11-23 23:59:59'
       client_id: $REPRISE_CLIENT_ID
-      token: $REPRISE_TOKEN
+      replay_token: $REPRISE_REPLAY_TOKEN
+      replicate_token: $REPRISE_REPLICATE_TOKEN
 
   loaders:
   - name: target-jsonl

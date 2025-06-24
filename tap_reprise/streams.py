@@ -36,24 +36,54 @@ class ReplaySessionActivityDailyStream(RepriseStream):
 
         params = {}
 
-        end_date = self.config.get("end_timestamp")
-        if end_date is None:
-            # If no end date is provided, use the current time in UTC
-            end_date = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
+        replication_key = self.get_starting_timestamp(context)
 
-        start_date = self.get_starting_timestamp(context)
-
-        if start_date is None:
-            start_date_str = self.config.get("start_timestamp")
+        if replication_key is None:
+            start_date = self.start_date
         else:
-            start_date_str = start_date.strftime("%Y-%m-%d %H:%M:%S")
-            
+            start_date = replication_key.strftime("%Y-%m-%d %H:%M:%S")
+
         params.update({
             "client_id": self.config["client_id"],
-            "start_timestamp": start_date_str,
-            "end_timestamp": end_date,
+            "start_timestamp": start_date,
+            "end_timestamp": self.end_date,
             "visitor_company": 1,
-            "token": self.config["token"]
+            "token": self.config["replay_token"]
+        })
+            
+        return params
+
+class ReplicateAnalyticsDailyStream(RepriseStream):
+    """Replay Session Activity stream from the Replicate Data API."""
+
+    name = "replicate_analytics_daily"
+    path = ""
+    primary_keys = ["shard_name"]
+    replication_key = "session_date"
+    schema_filepath = SCHEMAS_DIR / "replicate_analytics.json"
+
+    def is_timestamp_replication_key(self) -> bool:
+        return True
+
+    def get_url_params(
+        self,
+        context: dict | None,
+        next_page_token: Any | None,
+    ) -> dict[str, Any]:
+
+        params = {}
+
+        replication_key = self.get_starting_timestamp(context)
+
+        if replication_key is None:
+            start_date = self.start_date
+        else:
+            start_date = replication_key.strftime("%Y-%m-%d %H:%M:%S")
+ 
+        params.update({
+            "start_timestamp": start_date,
+            "end_timestamp": self.end_date,
+            "token": self.config["replicate_token"]
         })
             
         return params

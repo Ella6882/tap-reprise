@@ -19,14 +19,21 @@ class TapReprise(Tap):
             th.StringType,
             required=True,
             secret=True,  # Flag config as protected.
-            description="The client ID to authenticate against the API service",
+            description="The client ID to authenticate against the API service. This is required for the Replay API.",
         ),
         th.Property(
-            "token",
+            "replay_token",
             th.StringType,
             required=True,
             secret=True,  # Flag config as protected.
-            description="The token to authenticate against the API service",
+            description="The token to authenticate against the Replay API service",
+        ),
+        th.Property(
+            "replicate_token",
+            th.StringType,
+            required=True,
+            secret=True,  # Flag config as protected.
+            description="The token to authenticate against the Replicate API service",
         ),
         th.Property(
             "start_timestamp",
@@ -41,9 +48,9 @@ class TapReprise(Tap):
         th.Property(
             "api_url",
             th.StringType,
-            default="https://api.us-east.tinybird.co/v0/pipes/replay_session_activity.json",
-            description="The url for the Replay API service",  
-        )
+            default="https://api.us-east.tinybird.co/v0/pipes/",
+            description="The url for the API service",  
+        ),
     ).to_dict()
 
     def discover_streams(self) -> list[streams.RepriseStream]:
@@ -54,6 +61,7 @@ class TapReprise(Tap):
         """
         return [
             streams.ReplaySessionActivityDailyStream(self),
+            #streams.ReplicateAnalyticsDailyStream(self),
         ]
 
 

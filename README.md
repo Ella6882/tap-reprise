@@ -2,10 +2,15 @@
 
 `tap-reprise` is a Singer tap for Reprise. Reprise offers specific API endpoints that provide detailed data on viewer interactions and consumption patterns within your demos.
 
-Currently, the Reprise API supports the following:
-- 1 product (Reprise Replay)
+Currently, the Reprise API supports two products, Reprise Replay and Reprise Replicate:
+
+Reprise Replay requires
 - 1 authentication token 
 - 1 API endpoint (replay_session_activity)
+
+Reprise Replicate requires
+- 1 authentication token 
+- 1 API endpoint (API_Replicate_Analytics)
 
 Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 
@@ -38,13 +43,18 @@ environment variable is set either in the terminal context or in the `.env` file
 
 The instructions to create a token for the Reprise Replay Data API, based on the provided Zendesk article can be found [here](https://reprise.zendesk.com/hc/en-us/articles/18940321925659-Replay-Data-API).
 
-You will need to provide the token, client_id, and start_timestamp to use the tap.
+The instructions to create a token for the Reprise Replicate Data API, based on the provided Zendesk article can be found [here](https://reprise.zendesk.com/hc/en-us/articles/28931374746907-Replicate-Data-API).
+
+You will need to provide the token (Replay and Replicate), client_id, and start_timestamp (format: YYYY-MM-DD HH:MM:SS) to use the tap. There is an optional end_timestamp (format: YYYY-MM-DD HH:MM:SS) that can be configured as well.
+
+Due to a 100MB data limit per API request, we fetch data in daily intervals.
 
 ```
 {
     "client_id": "",
     "start_timestamp": "2025-06-20 00:00:00",
-    "token": ""
+    "replay_token": "",
+    "replicate_token": ""
 }
 ```
 
@@ -94,12 +104,6 @@ uv run tap-reprise --help
 
 _**Note:** This tap will work in any Singer environment and does not require Meltano.
 Examples here are for convenience and to streamline end-to-end orchestration scenarios._
-
-<!--
-Developer TODO:
-Your project comes with a custom `meltano.yml` project file already created. Open the `meltano.yml` and follow any "TODO" items listed in
-the file.
--->
 
 Next, install Meltano (if you haven't already) and any needed plugins:
 
