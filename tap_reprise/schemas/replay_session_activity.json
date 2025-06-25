@@ -15,6 +15,7 @@
     "create_at": { "type": ["null", "string"], "format": "date-time" },
     "session_id": { "type": ["string", "null"] },
     "visitor_company": { "type": ["string", "null"] },
+    "visitor_email": { "type": ["string", "null"] },
     "session_created_at": { "type": ["null", "string"], "format": "date-time" },
     "link_id": { "type": ["string", "null"] },
     "link_title": { "type": ["string", "null"] },

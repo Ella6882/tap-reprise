@@ -47,6 +47,11 @@ plugins:
       label: End Date
       description: Final date to start extracting data from
 
+    - name: domain
+      kind: string
+      label: Domain
+      description: Internal domain.
+
     settings_group_validation:
     - [token, client_id]
 
@@ -56,6 +61,7 @@ plugins:
       client_id: $REPRISE_CLIENT_ID
       replay_token: $REPRISE_REPLAY_TOKEN
       replicate_token: $REPRISE_REPLICATE_TOKEN
+      domain: ''
 
   loaders:
   - name: target-jsonl

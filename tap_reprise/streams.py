@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-import typing as t
-from importlib import resources
 import sys
+import re
 from datetime import datetime, timezone
-
+from importlib import resources
+import typing as t
 from tap_reprise.client import RepriseStream
+
 
 if sys.version_info >= (3, 9):
     import importlib.resources as importlib_resources
@@ -52,6 +53,35 @@ class ReplaySessionActivityDailyStream(RepriseStream):
         })
             
         return params
+
+    def post_process(
+        self,
+        row: dict,
+        context: Context | None = None,  # noqa: ARG002
+    ) -> dict | None:
+        """Modifies an individual record from a data stream 
+            by obfuscating certain parts of the text, as required.
+
+        Args:
+            row: An individual record from the stream.
+            context: The stream context.
+
+        Returns:
+            The updated record dictionary, or ``None`` to skip the record.
+        """
+        
+        domain = self.config.get("domain", None)
+        email = row.get('visitor_email')
+
+        if email is not None and domain is not None:
+            pattern = rf'^[\w\.-]+@({re.escape(domain)}\.\w+)$'
+            match = re.match(pattern, email)
+            if match:
+                row['visitor_email'] = f"@{match.group(1)}"
+            else:
+                row['visitor_email'] = None
+
+        return row
 
 class ReplicateAnalyticsDailyStream(RepriseStream):
     """Replay Session Activity stream from the Replicate Data API."""

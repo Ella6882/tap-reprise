@@ -58,6 +58,8 @@ Due to a 100MB data limit per API request, we fetch data in daily intervals.
 }
 ```
 
+An optional domain category is available to help you identify and retain internal email addresses, while redacting external ones.
+
 ## Usage
 
 You can easily run `tap-reprise` by itself or in a pipeline using [Meltano](https://meltano.com/).

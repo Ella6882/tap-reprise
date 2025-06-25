@@ -51,6 +51,11 @@ class TapReprise(Tap):
             default="https://api.us-east.tinybird.co/v0/pipes/",
             description="The url for the API service",  
         ),
+        th.Property(
+            "domain",
+            th.StringType,
+            description="The domain for the company account.",  
+        ),
     ).to_dict()
 
     def discover_streams(self) -> list[streams.RepriseStream]:
