@@ -61,7 +61,7 @@ class TapReprise(Tap):
         """
         return [
             streams.ReplaySessionActivityDailyStream(self),
-            #streams.ReplicateAnalyticsDailyStream(self),
+            streams.ReplicateAnalyticsDailyStream(self),
         ]
 
 
