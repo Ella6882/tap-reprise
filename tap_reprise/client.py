@@ -3,7 +3,7 @@
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
 from typing import Iterable, Tuple, Dict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import requests
 
@@ -25,7 +25,7 @@ class RepriseStream(RESTStream):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-    
+
         self.end_date = self.config.get("end_timestamp") if self.config.get("end_timestamp") else datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
         self.start_date = self.config.get("start_timestamp")
 
