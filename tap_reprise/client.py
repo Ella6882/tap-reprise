@@ -43,7 +43,7 @@ class RepriseStream(RESTStream):
         return f"{url}{extension}.json?"
 
     def get_records(self, context: Dict) -> Iterable[dict]:
-        """Override to fetch records for each 31-day period."""
+        """Override to fetch records for each day period."""
         
         for start, end in date_range(self.start_date, self.end_date):
             self.start_date = start
